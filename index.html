@@ -1,10 +1,10 @@
-﻿
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Trandum/Aursletta</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0, maximum-scale=1.0, user-scalable=no" />
+        <title>Fallskjermjegetroppen 69/70</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 		<link rel="stylesheet" href="src/leaflet_awesome_number_markers.css" />
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
@@ -19,7 +19,7 @@
 			<div id="map" style="height: 100vh; width: 100vw;"></div>
 <!			<div id="map" style="height: 1400px; width: 1000px;"></div>>
 		<script>
-            var map = L.map('map').setView([60.23,11.11], 14)
+            var map = L.map('map').setView([60.23,11.11], 7)
             L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
                 attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
             }).addTo(map);
@@ -27,24 +27,62 @@
 		<script>
 
 
-var steder = new Array(//elementene er : oppslagstekst, lengdegrad, breddegrad
-			["tom",0.0,0.0],//lar index 0 være tom, for enkelhets skyld i formler
-			["<strong>Pit´n </strong> anno 1970<br>Aursletta",60.22727,11.10976,"black"],
-			["<strong>Samlingspunkt</strong>",60.22644,11.11299],
-			["<strong>Minnesteinen</strong>",60.22592,11.11318,"green"],
-			["<strong>Vekatosøkket</strong><br>(Fastpunkt)",60.2318,11.1156],
-			["<strong>Flystripa</strong><br>(Start NØ)",60.22585,11.11483],
-			["<strong>Flystripa</strong><br>(Enden SV)",60.22209, 11.10569],
-			["<strong>Stridsvognvrak</strong><br>(tilnærmet lokalitet)",60.21901, 11.10532],
-			["<strong>Tankskytebanen</strong><br> (fastpunkt)",60.22068, 11.11702],
-			["<strong>Grana?</strong><br> (mulig lokalitet)",60.23045, 11.10551],
-			["<strong>Grana</strong><br> (største grana anno 1970)",60.22962, 11.10792],
-			["<strong>Hoppetårnet</strong>",60.21341, 11.11413],
-			["<strong>Skolebygningen</strong></br>Trandum leir",60.2111,11.12539,"green"]
+var dropsteder = new Array(//elementene er : oppslagstekst, undertekst, lengdegrad, breddegrad
+			["tom","tom",0.0,0.0],//lar index 0 være tom, for enkelhets skyld i formler
+            ["Stormyra", "taktisk hopp",69.022,18.53],
+            ["Kvitsanden Røros","Våpen og stridsekk",62.5825,11.36],
+            ["Flakstadmåsan","taktisk hopp",60.174,11.326],
+            ["Jorbesjavri","taktisk hopp",69.47,22.69],
+            ["Trøgstad Nike batteri","taktisk hopp",59.6358,11.394],
+            ["Mohøgda","Demo hopp",60.247,11.11],
+            ["Ringsmyrane","taktisk hopp",60.105,10.421],
+            ["Andsvann","treningshopping",69.07,18.43],
+            ["Altevann","taktisk hopp",68.60,19.165],
+            ["Flesland","Demo flystevne",60.29,5.22],
+            ["Nedre Vælsvatnet, Sokna","taktisk hopp",60.27638,10.03478],
+            ["Berkåk","taktisk hopp",62.808,10.05],
+            ["Oppdal","taktisk hopp",62.58,9.65],
+            ["Sennalandet","taktisk hopp",70.2569,24.1176],
+            ["Skaidi bru","taktisk hopp",70.43,24.50],
+            ["Grøndalen","taktisk hopp",62.15,9.128],
+            ["Gardermoen","treningshopping og demo",60.19,11.11],
+            ["Aursletta","Treningsfeltet",60.23,11.11],
 			)
+var ovelser = new Array(//steder vi har trent eller hatt øvelser uten å hoppe
+			["tom",0.0,0.0],
+            ["Flesland flyplass","Samøvelse med marinejegerne",60.288,5.24],
+            ["Holleia","sprengnig og vinterøvelse",60.16,10.05],
+            ["Hjerkinn","skyting og vintertrening",62.29,9.35],
+            ["Hauerseter","Skytebane",60.18,11.21],
+            ["Olavsvern orlogsstasjon","Ekskursjon",69.5309, 19.0125],
+            ["Gandvik kraftverk Kirkenes","avbrudt øvelse uten FF-hoppere",70.015,29.1154],
+            ["Torp flyplass","amerikansk massedropp",59.179,10.252],
+            ["Dovrebanen","Sprengning av jernbaneskinne",62.1119453,9.0880641],
+			)
+var forlegning = new Array(//steder vi har bodd, kortere eller lengre tid
+			["tom",0.0,0.0],
+            ["Lahaugmoen","Sanitetskurs",59.975,10.96],
+            ["Jørstadmoen","Sambandskurs",61.1476,10.38],
+            ["Hvalsmoen","Sprengningskurs",60.19,1029],
+            ["Mjølfjell","Fjellkurs",60.69,6.84],
+            ["Alta","Teltleir",69.98,23.37],
+            ["Haakonsvern","Dykkerkurs",60.339,5.228],
+            ["Tromsø","Ekskursjoner og forlegning",69.65,18.96],
+			)
+		var steder = dropsteder;
 		for (j=1;j<steder.length;j++){
-		var sted = L.marker([steder[j][1], steder[j][2]], {icon: new L.AwesomeNumberMarkers({number: j, markerColor: steder[j][3] })}).addTo(map);
-		sted.bindPopup(steder[j][0]);
+		var sted = L.marker([steder[j][2], steder[j][3]], {icon: new L.AwesomeNumberMarkers({number: j, markerColor: 'black' })}).addTo(map);
+		sted.bindPopup("<strong>"+steder[j][0]+"</strong><br>"+steder[j][1]);
+		}
+		var steder = ovelser;
+		for (j=1;j<steder.length;j++){
+		var sted = L.marker([steder[j][2], steder[j][3]], {icon: new L.AwesomeNumberMarkers({number: j, markerColor: 'green' })}).addTo(map);
+		sted.bindPopup("<strong>"+steder[j][0]+"</strong><br>"+steder[j][1]);
+		}
+		var steder = forlegning;
+		for (j=1;j<steder.length;j++){
+		var sted = L.marker([steder[j][2], steder[j][3]], {icon: new L.AwesomeNumberMarkers({number: j, markerColor: 'red' })}).addTo(map);
+		sted.bindPopup("<strong>"+steder[j][0]+"</strong><br>"+steder[j][1]);
 		}
 // make polyline from an array of LatLng points
 var startend = [
