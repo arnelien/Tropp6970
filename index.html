@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Trandum/Aursletta</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+		<link rel="stylesheet" href="src/leaflet_awesome_number_markers.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+		<script src="src/leaflet_awesome_number_markers.ajs"></script>
+    </head>
+    <style>
+	body{
+    padding: 0;
+    margin: 0;
+}
+</style>
+			<div id="map" style="height: 100vh; width: 100vw;"></div>
+<!			<div id="map" style="height: 1400px; width: 1000px;"></div>>
+		<script>
+            var map = L.map('map').setView([60.23,11.11], 14)
+            L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
+                attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
+            }).addTo(map);
+        </script>
+		<script>
+
+
+var steder = new Array(//elementene er : oppslagstekst, lengdegrad, breddegrad
+			["tom",0.0,0.0],//lar index 0 være tom, for enkelhets skyld i formler
+			["<strong>Pit´n </strong> anno 1970<br>Aursletta",60.22727,11.10976,"black"],
+			["<strong>Samlingspunkt</strong>",60.22644,11.11299],
+			["<strong>Minnesteinen</strong>",60.22592,11.11318,"green"],
+			["<strong>Vekatosøkket</strong><br>(Fastpunkt)",60.2318,11.1156],
+			["<strong>Flystripa</strong><br>(Start NØ)",60.22585,11.11483],
+			["<strong>Flystripa</strong><br>(Enden SV)",60.22209, 11.10569],
+			["<strong>Stridsvognvrak</strong><br>(tilnærmet lokalitet)",60.21901, 11.10532],
+			["<strong>Tankskytebanen</strong><br> (fastpunkt)",60.22068, 11.11702],
+			["<strong>Grana?</strong><br> (mulig lokalitet)",60.23045, 11.10551],
+			["<strong>Grana</strong><br> (største grana anno 1970)",60.22962, 11.10792],
+			["<strong>Hoppetårnet</strong>",60.21341, 11.11413],
+			["<strong>Skolebygningen</strong></br>Trandum leir",60.2111,11.12539,"green"]
+			)
+		for (j=1;j<steder.length;j++){
+		var sted = L.marker([steder[j][1], steder[j][2]], {icon: new L.AwesomeNumberMarkers({number: j, markerColor: steder[j][3] })}).addTo(map);
+		sted.bindPopup(steder[j][0]);
+		}
+// make polyline from an array of LatLng points
+var startend = [
+    [60.22585,11.11483],
+    [60.22209, 11.10569]
+];
+var flystripe = L.polyline(startend, {color: 'gray'}).addTo(map);
+		</script>
+    </body>
+</html>
+
